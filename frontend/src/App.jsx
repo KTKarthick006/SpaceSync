@@ -14,20 +14,25 @@ import GanttView from "./pages/GanttView.jsx";
 import MyBookings from "./pages/MyBookings.jsx";
 import AdminPanel from "./pages/AdminPanel.jsx";
 
-// Handles /auth/callback?token=xxx from Google OAuth redirect
 function OAuthCallback() {
   const navigate = useNavigate();
   const location = useLocation();
-  const {} = useAuth();
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const token = params.get("token");
+    const error = params.get("error");
+
+    if (error) {
+      navigate("/login");
+      return;
+    }
+
     if (token) {
       localStorage.setItem("ss_token", token);
-      window.location.href = "/"; // full reload to re-init AuthContext
+      navigate("/", { replace: true });
     } else {
-      navigate("/login?error=oauth_failed");
+      navigate("/login");
     }
   }, []);
 

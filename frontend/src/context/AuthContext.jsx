@@ -8,20 +8,11 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Handle OAuth callback token in URL
-    const params = new URLSearchParams(window.location.search);
-    const tokenFromUrl = params.get("token");
-    if (tokenFromUrl) {
-      localStorage.setItem("ss_token", tokenFromUrl);
-      window.history.replaceState({}, "", "/");
-    }
-
     const token = localStorage.getItem("ss_token");
     if (!token) {
       setLoading(false);
       return;
     }
-
     api
       .get("/auth/me")
       .then((r) => setUser(r.data.user))
@@ -37,7 +28,9 @@ export function AuthProvider({ children }) {
   };
 
   const loginWithGoogle = () => {
-    window.location.href = `${import.meta.env.VITE_API_URL || ""}/api/auth/google`;
+    const base =
+      import.meta.env.VITE_API_URL || "https://spacesync-rlzt.onrender.com";
+    window.location.href = `${base}/api/auth/google`;
   };
 
   const logout = () => {
