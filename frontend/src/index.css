@@ -1,0 +1,60 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #f1f5f9;
+  --surface:   #ffffff;
+  --border:    #e2e8f0;
+  --text:      #0f172a;
+  --muted:     #64748b;
+  --primary:   #2563eb;
+  --primary-h: #1d4ed8;
+  --gold:      #f59e0b;
+  --pending:   #fef3c7;
+  --pending-b: #f59e0b;
+  --approved:  #dcfce7;
+  --approved-b:#16a34a;
+  --rejected:  #fee2e2;
+  --rejected-b:#dc2626;
+  --cancelled: #f1f5f9;
+  --cancelled-b:#94a3b8;
+  --sidebar-w: 220px;
+  --radius:    10px;
+}
+
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.5; }
+
+button { cursor: pointer; font-family: inherit; font-size: 13px; border: none; border-radius: 6px; padding: 7px 14px; transition: all .15s; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+input, select, textarea { font-family: inherit; font-size: 14px; border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; width: 100%; outline: none; transition: border .15s; background: var(--surface); color: var(--text); }
+input:focus, select:focus, textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
+
+.btn-primary   { background: var(--primary); color: #fff; }
+.btn-primary:hover:not(:disabled) { background: var(--primary-h); }
+.btn-ghost     { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+.btn-ghost:hover:not(:disabled) { background: var(--bg); }
+.btn-danger    { background: #dc2626; color: #fff; }
+.btn-danger:hover:not(:disabled) { background: #b91c1c; }
+.btn-success   { background: #16a34a; color: #fff; }
+.btn-success:hover:not(:disabled) { background: #15803d; }
+.btn-warning   { background: #d97706; color: #fff; }
+.btn-warning:hover:not(:disabled) { background: #b45309; }
+.btn-sm { padding: 4px 10px; font-size: 12px; }
+
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 99px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .4px; }
+.badge-pending   { background: var(--pending);   color: #92400e; border: 1px solid var(--pending-b); }
+.badge-approved  { background: var(--approved);  color: #14532d; border: 1px solid var(--approved-b); }
+.badge-rejected  { background: var(--rejected);  color: #7f1d1d; border: 1px solid var(--rejected-b); }
+.badge-cancelled { background: var(--cancelled); color: #475569; border: 1px solid var(--cancelled-b); }
+
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+/* Loading */
+.spin { width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin .7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.center { display: flex; align-items: center; justify-content: center; }
