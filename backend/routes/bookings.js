@@ -59,6 +59,23 @@ router.post("/", protect, async (req, res) => {
     const d = new Date(date);
     d.setHours(0, 0, 0, 0);
 
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const maxDate = new Date(today);
+    maxDate.setDate(maxDate.getDate() + 7);
+
+    if (d < tomorrow)
+      return res
+        .status(400)
+        .json({ message: "Bookings must be from tomorrow onwards" });
+    if (d > maxDate)
+      return res
+        .status(400)
+        .json({ message: "Bookings can only be made up to 7 days in advance" });
+
     const conflict = await Booking.findOne({
       hall: hallId,
       date: d,
